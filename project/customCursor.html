@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIXI JS - get started</title>
+    <link rel="stylesheet" href="assests/css/style.css">
+    <script src="assests/js/pixi.min.js"></script>
+</head>
+<body>
+    <div id="pixi_wrapper" class="hero">
+        <div>
+            <p>
+                USE the <em>point-event</em> css property 
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // PIXI.utils.sayHello("pixijs running !!");
+        let pixi_element =  document.getElementById("pixi_wrapper");
+
+        let app = new PIXI.Application({
+            backgroundColor: 0x1D1D1D,
+            resizeTo: pixi_element
+        });
+
+        pixi_element.appendChild(app.view);
+
+        const customCursor = "url('assests/Images/blue.jpeg'), auto";
+        app.renderer.plugins.interaction.cursorStyles.default = customCursor;
+
+       
+
+    </script>
+</body>
+</html>

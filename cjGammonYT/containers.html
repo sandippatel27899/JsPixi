@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="pixi.min.js"></script>
+</head>
+<body>
+    <script>
+        let app = new PIXI.Application({
+            height: window.outerHeight,
+            width : window.outerWidth
+        });
+        document.body.appendChild(app.view);
+
+        let topContainer = new PIXI.Container();
+        let middleContainer = new PIXI.Container();
+        let lastContainer = new PIXI.Container();
+
+        middleContainer.visible = false;
+        lastContainer.visible = false;
+        app.stage.addChild(topContainer);
+        app.stage.addChild(middleContainer);
+        app.stage.addChild(lastContainer);
+
+        let redGraphics = new PIXI.Graphics();
+        redGraphics.beginFill(0xFF0000);
+        redGraphics.drawRect(0,0,window.outerWidth,window.outerHeight);
+
+        let greenGraphics = new PIXI.Graphics();
+        greenGraphics.beginFill(0x0000FF);
+        greenGraphics.drawRect(0,0,window.outerWidth,window.outerHeight);
+
+        let blueGraphics = new PIXI.Graphics();
+        blueGraphics.beginFill(0x00FF00);
+        blueGraphics.drawRect(0,0,window.outerWidth,window.outerHeight);
+
+        topContainer.addChild(redGraphics);
+        middleContainer.addChild(blueGraphics);
+        lastContainer.addChild(greenGraphics);
+
+        // window.addEventListener('click',switchContainer)
+        topContainer.interactive = true;
+        middleContainer.interactive = true;
+        lastContainer.interactive = true;
+        topContainer.on('pointer',switchContainer);
+        middleContainer.on('pointer',switchContainer);
+        lastContainer.on('pointer',switchContainer);
+
+        function switchContainer(){
+            console.log("called");
+            if (e.key == '1'){
+                topContainer.visible = true;
+                middleContainer.visible = false;
+                lastContainer.visible = false;
+            }
+            else if (e.key == '2'){
+                topContainer.visible = false;
+                middleContainer.visible = true;
+                lastContainer.visible = false;
+            }
+            else if (e.key == '3'){
+                topContainer.visible = false;
+                middleContainer.visible = false;
+                lastContainer.visible = true;
+            }
+        }
+
+
+
+    </script>
+    
+</body>
+</html>

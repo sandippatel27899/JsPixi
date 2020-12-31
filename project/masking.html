@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIXI JS - get started</title>
+    <link rel="stylesheet" href="assests/css/style.css">
+    <script src="assests/js/pixi.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi-filters@latest/dist/pixi-filters.js"></script>
+
+    "></script>
+
+</head>
+<body>
+    <div id="pixi_wrapper" class="hero"></div>
+
+    <script>
+        // PIXI.utils.sayHello("pixijs running !!");
+        let pixi_element =  document.getElementById("pixi_wrapper");
+
+        let app = new PIXI.Application({
+            backgroundColor: 0xffffff,
+            resizeTo: pixi_element
+        });
+
+        pixi_element.appendChild(app.view);
+
+        let addText = new PIXI.Text("add new text over here");
+        app.stage.addChild(addText);
+
+        let ImageBW = PIXI.Sprite.from("assests/Images/blue.jpeg");
+       
+        app.stage.addChild(ImageBW);
+
+        let adjustmentFilter = new PIXI.filters.AdjustmentFilter();
+        
+        adjustmentFilter.saturation = 0
+
+        ImageBW.filters = [
+            adjustmentFilter
+        ];
+
+        let ImageColor = PIXI.Sprite.from("assests/Images/blue.jpeg");
+       
+        app.stage.addChild(ImageColor);
+        let colorFilter = new PIXI.filters.AdjustmentFilter();
+
+        ImageBW.filters = [
+            colorFilter
+        ];
+
+        let maskRadius = 300;
+        let maskBlur = 23;
+        let maskShape = new PIXI.Graphics().beginFill(0xffffff).drawCircle(maskBlur + maskRadius, maskBlur + maskRadius, maskRadius).endFill();
+        maskShape.filters = [new PIXI.filters.BlurFilter(maskBlur)];
+
+
+        let maskBounds = new PIXI.Rectangle(0, 0, (maskBlur + maskRadius )* 2 ,(maskBlur + maskRadius )* 2 );
+        
+
+        let texture = app.renderer.generateTexture(maskShape,	PIXI.SCALE_MODES.NEAREST, 1, maskBounds);
+
+        let masker = new PIXI.Sprite(texture);
+        app.stage.addChild(masker);
+        ImageColor.mask = masker;
+
+    </script>
+</body>
+</html>

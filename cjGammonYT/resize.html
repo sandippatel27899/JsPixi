@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body{
+            margin :0;
+        }
+        canvas{
+            display: block;
+            background: blue;
+        }
+    </style>
+</head>
+<body>
+        <canvas id="mycanvas"></canvas>
+        <script src = "pixi.min.js"> </script>
+
+        <script type="text/javascript">
+const canvas = document.getElementById("mycanvas");
+_w = window.innerWidth;
+_h = window.innerHeight;
+
+const renderer = new PIXI.Renderer({
+    view:canvas,
+    width : _w,
+    height: _h,
+    resolution : window.devicePixelRatio,
+    autoDensity: true
+});
+
+window.addEventListener('resize',resize);
+
+function resize(){
+    _w = window.innerWidth;
+    _h = window.innerHeight;
+}
+const texture =  PIXI.Texture.from('bunny.jpeg');
+const image = new PIXI.Sprite(texture);
+// image.x = app.renderer.width / 2; // for add image in center 
+// image.y = app.renderer.height / 2;
+image.x = renderer.width /2;
+image.y = renderer.height /2;
+image.anchor.x = 0.5;  // center of image is in middle (default is top left corner)
+image.anchor.y = 0.5;
+// app.stage.addChild(image);
+const stage = new PIXI.Container();
+stage.addChild(image);
+
+// app.ticker.add(animate);
+const ticker = new PIXI.Ticker();
+ticker.add(animate);
+ticker.start();
+
+function animate(){
+    image.rotation += 0.1;
+    renderer.render(stage);
+}
+
+
+
+        </script>
+    
+</body>
+</html>

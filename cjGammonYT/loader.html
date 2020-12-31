@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body{
+            margin :0;
+        }
+        canvas{
+            display: block;
+            background: blue;
+        }
+    </style>
+</head>
+<body>
+        <canvas id="mycanvas"></canvas>
+        <script src = "pixi.min.js"> </script>
+
+        <script type="text/javascript">
+const canvas = document.getElementById("mycanvas");
+_w = window.innerWidth;
+_h = window.innerHeight;
+
+const app = new PIXI.Application({
+    view: canvas,
+    width: window.innerWidth,
+    height: window.innerHeight
+});
+
+console.log(PIXI.utils.textureCache);
+let loader = PIXI.Loader.shared;
+
+loader.onProgress.add(handleLoadProgress);
+loader.onComplete.add(handleLoadComplete);
+loader.onLoad.add(handleLoadAssets);
+// loader.onError.add(handleLoadError);
+
+loader.add("bunny.jpeg");
+loader.load();
+
+let img;
+function handleLoadProgress(loader, resource){
+    console.log(loader.progress + "% loaded");
+}
+
+function handleLoadAssets(){
+    console.log("asset loaded");
+}
+
+function handleLoadComplete(){
+    let texture = loader.resources["bunny.jpeg"].texture;
+    img= new PIXI.Sprite(texture); 
+    img.x = _w /2;
+    img.x = _h /  2;
+    img.anchor.x = 0.5;
+    img.anchor.y = 0.5;
+    app.stage.addChild(img);
+    app.ticker.add(animate);
+}
+
+function animate(){
+    img.rotation += 0.1;
+}
+
+
+
+        </script>
+    
+</body>
+</html>

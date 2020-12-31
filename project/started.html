@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIXI JS - get started</title>
+    <link rel="stylesheet" href="assests/css/style.css">
+    <script src="assests/js/pixi.min.js"></script>
+</head>
+<body>
+    <div id="pixi_wrapper" class="hero"></div>
+
+    <script>
+        // PIXI.utils.sayHello("pixijs running !!");
+        let pixi_element =  document.getElementById("pixi_wrapper");
+
+        let app = new PIXI.Application({
+            backgroundColor: 0xffffff,
+            resizeTo: pixi_element
+        });
+
+        pixi_element.appendChild(app.view);
+
+        let addText = new PIXI.Text("add new text over here");
+        app.stage.addChild(addText);
+
+        let addImage = PIXI.Sprite.from("assests/Images/test.png");
+        addImage.x = 50;
+        addImage.y = 100;
+
+        app.stage.addChild(addImage);
+
+    </script>
+</body>
+</html>
